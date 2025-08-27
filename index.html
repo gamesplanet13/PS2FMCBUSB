@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Games Planet • PS2 Quick Buy -- FMCB, USB & Combo</title>
   <meta name="description" content="Buy FMCB card, USB-only, or FMCB+USB Combo for PlayStation 2 with one-tap WhatsApp redirect. Top & Optional game packs supported."/>
   <style>
@@ -12,52 +12,46 @@
       --shadow:0 10px 30px rgba(0,0,0,.35);
     }
     @media(prefers-color-scheme:light){:root{--bg:#f7f8ff;--card:#ffffff;--text:#0b1020;--muted:#51607e;--chip:#eef2ff;--shadow:0 8px 20px rgba(11,16,32,.08)}}
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:
       radial-gradient(60vw 60vw at 10% -10%, rgba(124,77,255,.20), transparent 40%),
       radial-gradient(50vw 50vw at 110% 10%, rgba(61,220,132,.20), transparent 40%),
       var(--bg);color:var(--text)}
-    .wrap{max-width:1100px;margin:0 auto;padding:calc(16px + env(safe-area-inset-top)) 16px calc(70px + env(safe-area-inset-bottom))}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
     .brand{display:flex;align-items:center;gap:12px;margin-bottom:8px}
     .logo{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,var(--accent),#5ecbff);color:#fff;box-shadow:var(--shadow)}
     h1{font-size:clamp(22px,3.5vw,34px);margin:0}
     .sub{color:var(--muted);margin:6px 0 22px}
-    .controls{position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:6px 0 22px;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent);backdrop-filter:saturate(1.2) blur(4px);padding:8px;border-radius:14px}
-    .seg{display:flex;flex-wrap:wrap;background:var(--chip);padding:6px;border-radius:16px;box-shadow:var(--shadow)}
-    .seg button{border:0;background:transparent;color:var(--muted);padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700;min-height:40px}
+    .controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:6px 0 22px}
+    .seg{display:flex;background:var(--chip);padding:6px;border-radius:16px;box-shadow:var(--shadow)}
+    .seg button{border:0;background:transparent;color:var(--muted);padding:8px 14px;border-radius:12px;cursor:pointer;font-weight:700}
     .seg button.active{background:var(--accent);color:#fff;box-shadow:0 0 0 6px var(--ring)}
-    .linkbtn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.12);padding:10px 12px;border-radius:12px;color:var(--text);text-decoration:none;font-weight:700;min-height:40px}
+
+    .linkbtn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(255,255,255,.12);padding:9px 12px;border-radius:12px;color:var(--text);text-decoration:none;font-weight:700}
     .linkbtn:hover{box-shadow:0 0 0 6px var(--ring2)}
-    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+
+    /* SINGLE COLUMN ALWAYS (desktop & mobile) */
+    .grid{display:grid;gap:18px;grid-template-columns:1fr}
+
     .card{background:var(--card);border-radius:20px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
     .card:after{content:"";position:absolute;inset:auto -30% -30% auto;width:220px;height:220px;background:radial-gradient(90px 90px at 70% 30%, var(--ring), transparent 60%)}
     .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;background:var(--chip);color:var(--muted);border-radius:999px;font-size:12px;font-weight:700;margin-right:6px}
-    .title{margin:10px 0 6px;font-size:clamp(18px,2.2vw,22px)}
+    .title{margin:10px 0 6px;font-size:20px}
     .muted{color:var(--muted);font-size:14px}
+
     .variants{margin-top:14px;display:grid;gap:10px}
-    .row{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:10px;align-items:center}
-    .name{font-weight:700;line-height:1.35}
+    .row{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:8px;align-items:center}
+    .name{font-weight:700}
     .pill{display:inline-flex;align-items:center;gap:6px;background:var(--chip);padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px}
     .cta{display:flex;gap:8px}
-    .btn{flex:1;border:0;padding:12px;border-radius:12px;font-weight:800;cursor:pointer;min-height:44px}
+    .btn{flex:1;border:0;padding:10px 12px;border-radius:12px;font-weight:800;cursor:pointer}
     .btn.whatsapp{background:var(--accent2);color:#08210f}
     .btn.alt{background:var(--accent3);color:#241a00}
+
     .section{margin-top:28px}
     .list{margin:10px 0 0 0;padding-left:18px}
     .foot{opacity:.85;margin-top:34px;font-size:12px;color:var(--muted)}
-    @media (max-width: 720px){
-      .grid{grid-template-columns:1fr}
-      .row{grid-template-columns:1fr}
-      .name{margin-bottom:6px}
-      .cta{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-      .seg{width:100%}
-      .controls{gap:8px}
-      .linkbtn{flex:1;justify-content:center}
-    }
-    @media (prefers-reduced-motion:reduce){
-      *{scroll-behavior:auto}
-    }
   </style>
 </head>
 <body>
@@ -69,7 +63,7 @@
         <div class="sub">One-tap WhatsApp redirect • Top & Optional packs • Auto light/dark</div>
       </div>
     </div>
-    <!-- Global controls -->
+    <!-- Controls -->
     <div class="controls">
       <span class="badge">Payment Mode</span>
       <div class="seg" role="tablist" aria-label="Payment Mode">
@@ -78,11 +72,11 @@
       </div>
       <a class="linkbtn" href="https://gamesplanet13.github.io/ps2gameselector/" target="_blank" rel="noopener noreferrer">🟨 Optional Games Selector</a>
       <a class="linkbtn" href="https://youtu.be/bpGm0IAeyek" target="_blank" rel="noopener noreferrer">▶️ Setup Video</a>
-      <span class="badge">Responsive • Mobile + Desktop</span>
+      <span class="badge">Rules: Optional +₹99 • FMCB COD +₹99 always</span>
     </div>
 
     <div class="grid">
-      <!-- FMCB / FunTuna Card Only -->
+      <!-- 1) FMCB / FunTuna Card -->
       <section class="card" aria-labelledby="fmcb-title">
         <span class="badge">FMCB / FunTuna Card</span>
         <h2 class="title" id="fmcb-title">Memory Card for PS2 (Model-wise)</h2>
@@ -106,7 +100,7 @@
         </div>
       </section>
 
-      <!-- USB Only -->
+      <!-- 2) USB Only -->
       <section class="card" aria-labelledby="usb-title">
         <span class="badge">USB Only</span>
         <h2 class="title" id="usb-title">USB for PlayStation 2 — Game-Loaded</h2>
@@ -118,7 +112,7 @@
         </div>
       </section>
 
-      <!-- FMCB + USB Combo -->
+      <!-- 3) FMCB + USB Combo -->
       <section class="card" aria-labelledby="combo-title">
         <span class="badge">Combo Best Value</span>
         <h2 class="title" id="combo-title">FMCB + USB Combo for PS2</h2>
@@ -130,7 +124,7 @@
       </section>
     </div>
 
-    <!-- Important notes -->
+    <!-- Notes -->
     <div class="section">
       <h3>⚠️ Important Notes</h3>
       <ul class="list">
@@ -215,11 +209,7 @@
   }
 
   const fmt = n => `₹${n.toLocaleString('en-IN')}`;
-
-  function computeCodAdvance(total){
-    return Math.max(500, Math.ceil(total * 0.10));
-  }
-
+  function computeCodAdvance(total){ return Math.max(500, Math.ceil(total * 0.10)); }
   function priceFmcbBase(){ return 999; }
 
   // Label helper: shows mode + pack + amount
