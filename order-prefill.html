@@ -224,25 +224,18 @@
     </div>
   </div>
 
-  <!-- Delivery Meta -->
+  <!-- Order (only Order ID visible) -->
   <div class="card">
-    <span class="badge">Delivery Meta</span>
-    <div class="grid3">
-      <div>
-        <div class="label">Distance</div>
-        <input id="distance" placeholder="(auto)" readonly>
-      </div>
-      <div>
-        <div class="label">Prepaid ETA</div>
-        <input id="etaText" placeholder="(auto)" readonly>
-      </div>
-      <div>
-        <div class="label">Prepaid Estimated Delivery</div>
-        <input id="dateRange" placeholder="(auto)" readonly>
-      </div>
-    </div>
-    <div class="label" style="margin-top:8px">Order ID</div>
+    <span class="badge">Order</span>
+    <div class="label">Order ID</div>
     <input id="orderId" placeholder="(auto)" readonly>
+  </div>
+
+  <!-- Hidden meta fields (kept for logic / WhatsApp msg) -->
+  <div style="display:none">
+    <input id="distance" type="text" />
+    <input id="etaText" type="text" />
+    <input id="dateRange" type="text" />
   </div>
 
   <!-- Actions -->
@@ -482,7 +475,7 @@ function computeTotals(){
 /* ===== Utils ===== */
 /* Amounts WITHOUT commas for WhatsApp */
 function rs(n){
-  return "₹" + (Number(n) || 0); // plain number, no locale commas
+  return "₹" + (Number(n) || 0);
 }
 function upiLink(amount,note){
   const p=new URLSearchParams({pa:UPI_ID,pn:UPI_NAME,am:String(amount||0),cu:"INR",tn:note});
@@ -515,9 +508,9 @@ function buildWhatsAppTemplate(forMode){
 
   // eta/date
   const etaPre = document.getElementById("etaText").value || "";
-  const rangePre = document.getElementById("dateRange").value || "";
+  theRangePre = document.getElementById("dateRange").value || "";
   const etaCod = document.getElementById("etaTextCod")?.value || etaPre;
-  const rangeCod = document.getElementById("dateRangeCOD")?.value || rangePre;
+  const rangeCod = document.getElementById("dateRangeCOD")?.value || theRangePre;
 
   const common = [
     `Order ID: ${document.getElementById("orderId").value || orderIdNow()}`,
@@ -547,7 +540,7 @@ function buildWhatsAppTemplate(forMode){
       "",
       `📏 Distance: ${document.getElementById("distance").value || ""}`,
       `⏳ Prepaid Order ETA: ${etaPre}`,
-      `📅 Estimated Delivery: ${rangePre}`
+      `📅 Estimated Delivery: ${theRangePre}`
     ].join("\n");
   }else{
     const paid = +document.getElementById("amountPaid_cod").value || 0;
@@ -660,7 +653,7 @@ document.getElementById("pincode").addEventListener("input",function(){
           const codEtaText = (cod.min===cod.max) ? `${cod.min} days` : `${cod.min}–${cod.max} days`;
           const codRangeFull = formatDateRange(cod.min, cod.max);
 
-          // Fill meta (prepaid kept in original fields)
+          // Keep meta in hidden inputs
           document.getElementById("distance").value=`${d} km`;
           document.getElementById("etaText").value=eta;
           document.getElementById("dateRange").value=preRangeFull;
