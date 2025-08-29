@@ -39,7 +39,7 @@
   .ghost{background:#f8fafc;border:1px solid #e5e7eb;color:#111827}
   .hint{color:var(--muted);font-size:13px;margin-top:6px;white-space:pre-line}
 
-  /* Hide these info lines on UI */
+  /* Hide info lines on UI (as requested) */
   #ruleNote,
   #addonsHelp { display: none !important; }
 
@@ -444,7 +444,7 @@ function computeTotals(){
   document.getElementById("addonsTotal").value = addons;
   document.getElementById("subtotal").value = subtotal;
 
-  // Hidden info text (kept for reference; not visible)
+  // Hidden info text (reference only; not visible)
   document.getElementById("ruleNote").innerText =
     "COD rules: ≥ ₹1899 → ₹0 • ₹1399–₹1898 → ₹99 • < ₹1399 → No COD. Coupon (prepaid): FMCB/USB/Combo 5% OR 64GB ₹200 • 128GB ₹300 • 256GB ₹500.";
 
@@ -500,10 +500,15 @@ function productWithAddons(){
   return parts.length ? `${baseName} + ${parts.join(", ")}` : baseName;
 }
 
-/* ===== WA template (exact format) ===== */
+/* ===== WA template (House no. merged into Address) ===== */
 function buildWhatsAppTemplate(forMode){
   const isCod = (forMode==="cod");
   const basePrice = +document.getElementById("basePrice").value || 0;
+
+  // Build Address with House no. prefixed if present
+  const house = (document.getElementById("house").value || "").trim();
+  const addr  = (document.getElementById("address").value || "").trim();
+  const fullAddress = (house ? house + ", " : "") + addr;
 
   // eta/date
   const etaPre = document.getElementById("etaText").value || "";
@@ -517,7 +522,7 @@ function buildWhatsAppTemplate(forMode){
     `Mobile: ${document.getElementById("mobile").value || ""}`,
     `Alt Mobile: ${document.getElementById("altMobile").value || ""}`,
     `Email: ${document.getElementById("email").value || ""}`,
-    `Address: ${document.getElementById("address").value || ""}`,
+    `Address: ${fullAddress}`,
     `Landmark: ${document.getElementById("landmark").value || ""}`,
     `Pincode: ${document.getElementById("pincode").value || ""}`,
     `State: ${document.getElementById("state").value || ""}`,
@@ -534,7 +539,7 @@ function buildWhatsAppTemplate(forMode){
       "🟢 Prepaid Order on WhatsApp",
       "",
       ...common,
-      `Discount Applied:${discountValue>0 ? " "+rs(discountValue) : ""}`,
+      `Discount Applied:${(typeof discountValue==='number' && discountValue>0) ? " "+rs(discountValue) : ""}`,
       `Amount Paid: ${rs(paid)}`,
       "",
       `📏 Distance: ${document.getElementById("distance").value || ""}`,
@@ -680,8 +685,8 @@ document.getElementById("pincode").addEventListener("input",function(){
 });
 
 /* Live updates that might affect totals/eligibility */
-["name","mobile","altMobile","email","address","landmark","pincode","state","city","product","variant","basePrice"]
-.forEach(id=>{const el=document.getElementById(id); if(el){ el.addEventListener("input",()=>{ if(id==="product"||id==="variant"){ const code=(document.getElementById("couponCode").value||"").trim().toLowerCase(); if(code==="gpz2025" && mode==="prepaid") applyCoupon(); } }); }});
+["name","mobile","altMobile","email","address","landmark","pincode","state","city","product","variant","basePrice","house"]
+.forEach(id=>{const el=document.getElementById(id); if(el){ el.addEventListener("input",()=>{ /* no-op: submit builds fresh text */ }); }});
 document.getElementById("postoffice").addEventListener("change",()=>{});
 </script>
 </body>
