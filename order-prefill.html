@@ -156,6 +156,7 @@
         <div class="label">Choose add-on</div>
         <select id="addonSelect">
           <option value="" data-price="0">— Select —</option>
+          <!-- Existing add-ons -->
           <option value="Wire Gamepad" data-price="399">Wire Gamepad — ₹399</option>
           <option value="Wireless Gamepad" data-price="749">Wireless Gamepad — ₹749</option>
           <option value="PS2 Slim Sticker/Skin" data-price="60">PS2 Slim Sticker/Skin — ₹60</option>
@@ -163,6 +164,14 @@
           <option value="HDMI Cable" data-price="99">HDMI Cable — ₹99</option>
           <option value="Best HDMI Cable" data-price="349">Best HDMI Cable — ₹349</option>
           <option value="Blank Memory Card 8MB" data-price="549">Blank Memory Card 8MB — ₹549</option>
+          <!-- Batteries / Courier add-ons -->
+          <option value="AAA Batteries of duaracel PACK OF 4" data-price="88">AAA Batteries of duaracel PACK OF 4 — ₹88</option>
+          <option value="AAA RECHARGEABLE BATTERIES PACK OF 4" data-price="599">AAA RECHARGEABLE BATTERIES PACK OF 4 — ₹599</option>
+          <option value="AAA/AA  BARTERIES CHARGER 4 SLOT" data-price="450">AAA/AA  BARTERIES CHARGER 4 SLOT — ₹450</option>
+          <option value="AAA 4 BATTERIES AND  4 PORT CHARGER COMBO" data-price="919">AAA 4 BATTERIES AND  4 PORT CHARGER COMBO — ₹919</option>
+          <option value="TRACKON.IN PRIME COURIER SERVICE" data-price="200">TRACKON.IN PRIME COURIER SERVICE — ₹200</option>
+          <!-- NEW: Gift Wrap -->
+          <option value="Gift Wrap" data-price="35">Gift Wrap — ₹35</option>
         </select>
       </div>
       <div>
@@ -463,7 +472,7 @@ function computeTotals(){
     document.getElementById("codCharges").value = codC;
     // Advance: max(₹500, 10% of (subtotal+codC))
     paid = Math.max(500, Math.ceil((subtotal + codC) * 0.10));
-    rest = Math.max(0, subtotal + codC - paid);
+    rest = Math.max(0, subtotal + codC - paid;
     document.getElementById("amountPaid_cod").value = paid;
     document.getElementById("restAmount").value = rest;
   }
@@ -475,7 +484,7 @@ function computeTotals(){
 /* ===== Utils ===== */
 /* Amounts WITHOUT commas for WhatsApp */
 function rs(n){
-  return "₹" + (Number(n) || 0);
+  return "₹" + (Number(n) || 0); // plain number, no locale commas
 }
 function upiLink(amount,note){
   const p=new URLSearchParams({pa:UPI_ID,pn:UPI_NAME,am:String(amount||0),cu:"INR",tn:note});
@@ -508,9 +517,9 @@ function buildWhatsAppTemplate(forMode){
 
   // eta/date
   const etaPre = document.getElementById("etaText").value || "";
-  theRangePre = document.getElementById("dateRange").value || "";
+  const rangePre = document.getElementById("dateRange").value || "";
   const etaCod = document.getElementById("etaTextCod")?.value || etaPre;
-  const rangeCod = document.getElementById("dateRangeCOD")?.value || theRangePre;
+  const rangeCod = document.getElementById("dateRangeCOD")?.value || rangePre;
 
   const common = [
     `Order ID: ${document.getElementById("orderId").value || orderIdNow()}`,
@@ -540,7 +549,7 @@ function buildWhatsAppTemplate(forMode){
       "",
       `📏 Distance: ${document.getElementById("distance").value || ""}`,
       `⏳ Prepaid Order ETA: ${etaPre}`,
-      `📅 Estimated Delivery: ${theRangePre}`
+      `📅 Estimated Delivery: ${rangePre}`
     ].join("\n");
   }else{
     const paid = +document.getElementById("amountPaid_cod").value || 0;
