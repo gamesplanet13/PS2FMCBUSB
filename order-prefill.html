@@ -164,14 +164,12 @@
           <option value="HDMI Cable" data-price="99">HDMI Cable — ₹99</option>
           <option value="Best HDMI Cable" data-price="349">Best HDMI Cable — ₹349</option>
           <option value="Blank Memory Card 8MB" data-price="549">Blank Memory Card 8MB — ₹549</option>
-          <!-- Batteries / Courier add-ons -->
+          <!-- NEW add-ons requested -->
           <option value="AAA Batteries of duaracel PACK OF 4" data-price="88">AAA Batteries of duaracel PACK OF 4 — ₹88</option>
           <option value="AAA RECHARGEABLE BATTERIES PACK OF 4" data-price="599">AAA RECHARGEABLE BATTERIES PACK OF 4 — ₹599</option>
           <option value="AAA/AA  BARTERIES CHARGER 4 SLOT" data-price="450">AAA/AA  BARTERIES CHARGER 4 SLOT — ₹450</option>
           <option value="AAA 4 BATTERIES AND  4 PORT CHARGER COMBO" data-price="919">AAA 4 BATTERIES AND  4 PORT CHARGER COMBO — ₹919</option>
           <option value="TRACKON.IN PRIME COURIER SERVICE" data-price="200">TRACKON.IN PRIME COURIER SERVICE — ₹200</option>
-          <!-- NEW: Gift Wrap -->
-          <option value="Gift Wrap" data-price="35">Gift Wrap — ₹35</option>
         </select>
       </div>
       <div>
@@ -472,7 +470,7 @@ function computeTotals(){
     document.getElementById("codCharges").value = codC;
     // Advance: max(₹500, 10% of (subtotal+codC))
     paid = Math.max(500, Math.ceil((subtotal + codC) * 0.10));
-    rest = Math.max(0, subtotal + codC - paid;
+    rest = Math.max(0, subtotal + codC - paid);
     document.getElementById("amountPaid_cod").value = paid;
     document.getElementById("restAmount").value = rest;
   }
